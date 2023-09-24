@@ -254,6 +254,21 @@ const Books = () => {
     releasedate: '',
   });
 
+  
+  const filterBooks = () => {
+    const { title, author, subject, releasedate } = filterCriteria;
+    const filtered = bookData.filter((book) => {
+      const matchesTitle = book.title.toLowerCase().includes(title.toLowerCase());
+      const matchesAuthor = book.author.toLowerCase().includes(author.toLowerCase());
+      const matchesSubject = book.subject.toLowerCase().includes(subject.toLowerCase());
+      const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
+      return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
+    });
+    
+    setFilteredBooks(filtered);
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
     filterBooks();
   }, [filterCriteria]);
@@ -267,18 +282,7 @@ const Books = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
  // Filter books
- const filterBooks = () => {
-  const { title, author, subject, releasedate } = filterCriteria;
-  const filtered = bookData.filter((book) => {
-    const matchesTitle = book.title.toLowerCase().includes(title.toLowerCase());
-    const matchesAuthor = book.author.toLowerCase().includes(author.toLowerCase());
-    const matchesSubject = book.subject.toLowerCase().includes(subject.toLowerCase());
-    const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
-    return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
-  });
-  setFilteredBooks(filtered);
-  setCurrentPage(1);
-};
+
 
   // Reset filters
   const resetFilters = () => {
