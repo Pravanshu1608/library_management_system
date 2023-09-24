@@ -264,14 +264,14 @@ const Books = () => {
       const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
       return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
     });
-    
+
     setFilteredBooks(filtered);
     setCurrentPage(1);
   };
 
   useEffect(() => {
     filterBooks();
-  }, [filterCriteria]);
+  }, [filterCriteria, filterBooks]);
 
   // Calculate indexes for pagination
   const indexOfLastBook = currentPage * booksPerPage;
