@@ -255,25 +255,47 @@ const Books = () => {
   });
 
   
-  const filterBooks = () => {
-    const { title, author, subject, releasedate } = filterCriteria;
-    const filtered = bookData.filter((book) => {
-      const matchesTitle = book.title.toLowerCase().includes(title.toLowerCase());
-      const matchesAuthor = book.author.toLowerCase().includes(author.toLowerCase());
-      const matchesSubject = book.subject.toLowerCase().includes(subject.toLowerCase());
-      const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
-      return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
-    });
+  // const filterBooks = () => {
+  //   const { title, author, subject, releasedate } = filterCriteria;
+  //   const filtered = bookData.filter((book) => {
+  //     const matchesTitle = book.title.toLowerCase().includes(title.toLowerCase());
+  //     const matchesAuthor = book.author.toLowerCase().includes(author.toLowerCase());
+  //     const matchesSubject = book.subject.toLowerCase().includes(subject.toLowerCase());
+  //     const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
+  //     return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
+  //   });
 
-    setFilteredBooks(filtered);
-    setCurrentPage(1);
-  };
+  //   setFilteredBooks(filtered);
+  //   setCurrentPage(1);
+  // };
 
-  useEffect(() => {
-    filterBooks();
-  }, [filterCriteria, filterBooks]);
+  // useEffect(() => {
+  //   filterBooks();
+  // }, [filterCriteria, filterBooks]);
+
 
   // Calculate indexes for pagination
+
+  useEffect(() => {
+    const filterBooks = () => {
+      const { title, author, subject, releasedate } = filterCriteria;
+      const filtered = bookData.filter((book) => {
+        const matchesTitle = book.title.toLowerCase().includes(title.toLowerCase());
+        const matchesAuthor = book.author.toLowerCase().includes(author.toLowerCase());
+        const matchesSubject = book.subject.toLowerCase().includes(subject.toLowerCase());
+        const matchesReleaseDate = book.releasedate.toLowerCase().includes(releasedate.toLowerCase());
+        return matchesTitle && matchesAuthor && matchesSubject && matchesReleaseDate;
+      });
+  
+      setFilteredBooks(filtered);
+      setCurrentPage(1);
+    };
+  
+    filterBooks();
+  }, [filterCriteria]);
+  
+
+
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
